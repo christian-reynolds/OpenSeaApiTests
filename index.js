@@ -1,8 +1,6 @@
 require('dotenv').config();
 const axios = require('axios');
 
-console.log(process.env.API_KEY);
-
 const options = {
     headers: { 
         'Accept': 'application/json', 
