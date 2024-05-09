@@ -2,8 +2,23 @@ require('dotenv').config();
 const axios = require('axios');
 const fs = require('fs');
 
-const baseParams = 'after=1661990400&before=1715073743&event_type=sale&limit=50';
+// Get the current datetime
+const now = new Date();
+
+// Convert current datetime to Unix epoch timestamp (milliseconds)
+const unixTimestamp = now.getTime();
+
+// If you need the Unix epoch time in seconds (some applications expect Unix time in seconds)
+const unixTimestampInSeconds = Math.floor(unixTimestamp / 1000);
+
+console.log("Current datetime as Unix epoch timestamp (milliseconds):", unixTimestamp);
+console.log("Current datetime as Unix epoch timestamp (seconds):", unixTimestampInSeconds);
+
+// The param after is hardcoded to 9/1/2022 12AM GMT.  This is the day the collection was created
+const baseParams = `after=1661990400&before=${unixTimestampInSeconds}&event_type=sale&limit=50`;
 const baseUrl = `https://api.opensea.io/api/v2/events/collection/kernels-by-julian-hespenheide?${baseParams}`;
+
+console.log(baseUrl);
 
 const options = {
     headers: { 
@@ -33,7 +48,7 @@ async function fetchEvents(nextCursor) {
             console.log(jsonData); // Log all data to the console
             fs.writeFile('kernels-historical-sales.json', jsonData, (err) => {
                 if (err) throw err;
-                console.log('Data written to file output.json');
+                console.log('Data written to file kernels-historical-sales.json');
             }); // Write the JSON data to a file
         }
     } catch (error) {
