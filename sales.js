@@ -47,7 +47,7 @@ async function fetchEvents(nextCursor) {
             console.log('All pages have been fetched, logging data...');
             const jsonData = JSON.stringify(allEvents, null, 2);
             console.log(jsonData); // Log all data to the console
-            fs.writeFile(`${collectionSlug}-sales.json`, jsonData, (err) => {
+            fs.writeFile(`data-files/${collectionSlug}-sales.json`, jsonData, (err) => {
                 if (err) throw err;
                 console.log(`Data written to file ${collectionSlug}-sales.json`);
             }); // Write the JSON data to a file
