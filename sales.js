@@ -15,8 +15,10 @@ console.log("Current datetime as Unix epoch timestamp (milliseconds):", unixTime
 console.log("Current datetime as Unix epoch timestamp (seconds):", unixTimestampInSeconds);
 
 // The param after is hardcoded to 9/1/2022 12AM GMT.  This is the day the collection was created
-const baseParams = `after=1661990400&before=${unixTimestampInSeconds}&event_type=sale&limit=50`;
+const eventType = 'sale';
+const baseParams = `after=1661990400&before=${unixTimestampInSeconds}&event_type=${eventType}&limit=50`;
 const collectionSlug = 'kernels-by-julian-hespenheide';
+const fileName = `${collectionSlug}-${eventType}.json`;
 const baseUrl = `https://api.opensea.io/api/v2/events/collection/${collectionSlug}?${baseParams}`;
 
 console.log(baseUrl);
@@ -47,9 +49,9 @@ async function fetchEvents(nextCursor) {
             console.log('All pages have been fetched, logging data...');
             const jsonData = JSON.stringify(allEvents, null, 2);
             console.log(jsonData); // Log all data to the console
-            fs.writeFile(`data-files/${collectionSlug}-sales.json`, jsonData, (err) => {
+            fs.writeFile(`data-files/${fileName}`, jsonData, (err) => {
                 if (err) throw err;
-                console.log(`Data written to file ${collectionSlug}-sales.json`);
+                console.log(`Data written to file ${fileName}`);
             }); // Write the JSON data to a file
         }
     } catch (error) {
