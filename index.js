@@ -8,19 +8,34 @@ const options = {
     }
 };
 
-// Current Listings
-// axios.get('https://api.opensea.io/api/v2/listings/collection/kernels-by-julian-hespenheide/all', options)
+// Current Listings for an entire collection
+// axios.get('https://api.opensea.io/api/v2/listings/collection/bright-moments-finale/all', options)
 //   .then(response => {
 //       // Convert the response data to a JSON string with indentation
 //       console.log(JSON.stringify(response.data, null, 2));
 //   })
 //   .catch(err => console.error(err));
 
-// Historical Sales
-fetch('https://api.opensea.io/api/v2/events/collection/kernels-by-julian-hespenheide?after=1661990400&before=1715073743&event_type=sale&limit=50', options)
-  .then(response => response.json())
-  .then(response => console.log(response))
+
+// Define an array of token IDs - These are the Julian Hespendheide tokens in the BM Finale collection
+const tokenIds = [147, 199, 257, 276, 345, 479, 545, 582, 642, 682, 687, 835, 896, 90, 913, 100];
+
+// Convert the array into a query string
+const idQueryString = tokenIds.map(id => `&token_ids=${id}`).join('');
+
+// Current Listings by token ID
+axios.get(`https://api.opensea.io/api/v2/orders/ethereum/seaport/listings?asset_contract_address=0x381233D5584fDb42e46b4D9ba91876479AAb7AcD${idQueryString}`, options)
+  .then(response => {
+      // Convert the response data to a JSON string with indentation
+      console.log(JSON.stringify(response.data, null, 2));
+  })
   .catch(err => console.error(err));
+
+// Historical Sales
+// fetch('https://api.opensea.io/api/v2/events/collection/kernels-by-julian-hespenheide?after=1661990400&before=1715073743&event_type=sale&limit=50', options)
+//   .then(response => response.json())
+//   .then(response => console.log(response))
+//   .catch(err => console.error(err));
 
 // General Stats
 // fetch('https://api.opensea.io/api/v2/collections/kernels-by-julian-hespenheide/stats', options)
