@@ -11,6 +11,7 @@ This is a NodeJS project for interacting with the OpenSea API, primarily focusin
   - [Fetch Listings](#fetch-listings)
 - [Project Structure](#project-structure)
 - [Dependencies](#dependencies)
+- [Contributing](#contributing)
 - [License](#license)
 
 ## Installation
@@ -62,6 +63,10 @@ node index.js
 - `axios`: Promise-based HTTP client for making API requests.
 - `dotenv`: Module to load environment variables from a `.env` file.
 - `express`: Web framework for Node.js.
+
+## Contributing
+
+Contributions are welcome! Please submit a pull request or open an issue to discuss any changes.
 
 ## License
 
