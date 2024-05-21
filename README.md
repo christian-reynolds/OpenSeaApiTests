@@ -71,6 +71,7 @@ Contributions are welcome! Please submit a pull request or open an issue to disc
 ## License
 
 This project is licensed under the ISC License.
+
 ---
 
 Feel free to reach out if you have any questions or need further assistance. Happy coding!
